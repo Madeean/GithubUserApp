@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.madeean.githubuserapp.Utils.orEmpty
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.data.response.DetailUserGithubModel
-import com.madeean.githubuserapp.data.response.GithubModel
 import com.madeean.githubuserapp.data.retrofit.ApiConfig
 import com.madeean.githubuserapp.ui.searchuser.MainState
 import kotlinx.coroutines.launch
@@ -30,8 +28,6 @@ class DetailViewModel : ViewModel() {
     var usersFollowing: LiveData<MainState> = _usersFollowing
 
     private val _usernameSearch = MutableLiveData<String>()
-
-    var usernameSearch: LiveData<String> = _usernameSearch
 
 
     fun getDetail(username: String, context: Context) {

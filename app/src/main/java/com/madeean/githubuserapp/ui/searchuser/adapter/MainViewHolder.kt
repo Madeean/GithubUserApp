@@ -1,7 +1,6 @@
 package com.madeean.githubuserapp.ui.searchuser.adapter
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
 import com.madeean.githubuserapp.R
 import com.madeean.githubuserapp.Utils.loadUseGifThumb
 import com.madeean.githubuserapp.Utils.setVisibility

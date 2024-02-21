@@ -1,11 +1,10 @@
 package com.madeean.githubuserapp.ui.detailuser
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,9 +14,6 @@ import com.madeean.githubuserapp.Utils.loadUseGifThumb
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DetailUserGithubModel
 import com.madeean.githubuserapp.databinding.ActivityDetailBinding
-import com.madeean.githubuserapp.ui.detailuser.fragment.FollowersFragment
-import com.madeean.githubuserapp.ui.detailuser.fragment.FollowingFragment
-import com.madeean.githubuserapp.ui.searchuser.MainViewModel
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -85,14 +81,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun loadData() {
         nameUser = intent.getStringExtra(INTENT_DATA).toString()
-    }
-
-    companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.follower,
-            R.string.following
-        )
     }
 
 }

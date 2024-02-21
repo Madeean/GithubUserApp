@@ -1,12 +1,10 @@
 package com.madeean.githubuserapp.data.retrofit
 
-import com.madeean.githubuserapp.BuildConfig
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.data.response.DetailUserGithubModel
 import com.madeean.githubuserapp.data.response.GithubModel
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 

@@ -1,12 +1,11 @@
 package com.madeean.githubuserapp.ui.searchuser
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.madeean.githubuserapp.R.layout
 import com.madeean.githubuserapp.Utils.INTENT_DATA
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
@@ -15,7 +14,6 @@ import com.madeean.githubuserapp.ui.detailuser.DetailActivity
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainAdapter
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainRepresentation
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
-import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

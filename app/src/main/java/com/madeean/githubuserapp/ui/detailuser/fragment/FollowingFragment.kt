@@ -2,18 +2,13 @@ package com.madeean.githubuserapp.ui.detailuser.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.style.TtsSpan.ARG_USERNAME
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.madeean.githubuserapp.R
 import com.madeean.githubuserapp.Utils
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
@@ -24,7 +19,6 @@ import com.madeean.githubuserapp.ui.searchuser.MainState
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainAdapter
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainRepresentation
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
-import java.util.ArrayList
 
 class FollowingFragment : Fragment() {
     private lateinit var binding: FragmentFollowingBinding
@@ -102,7 +96,6 @@ class FollowingFragment : Fragment() {
     private fun setData(userList: ArrayList<DataUserGithubModel>) {
         binding.progressBar.setVisibility(false)
         dataAdapter.submitList(MainRepresentation.transform(userList))
-        dataAdapter.notifyDataSetChanged()
     }
 
     private fun setLoadingView() {

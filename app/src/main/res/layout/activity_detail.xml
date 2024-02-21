@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.detailuser.DetailActivity"
+  >
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_gray"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:textColor="@color/gray2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Github User's Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+      <ImageView
+        android:id="@+id/iv_setting"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/baseline_settings_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/gray2"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      android:layout_width="match_parent"
+      android:background="@color/light_gray"
+      android:layout_height="match_parent"
+      android:paddingTop="16dp"
+      >
+
+      <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_broken_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+      <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_username"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_image"
+        />
+
+      <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginTop="10dp"
+        android:text="name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_username"
+        />
+
+      <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <com.google.android.material.tabs.TabLayout
+          android:id="@+id/tabs"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/light_gray"
+          app:tabIndicatorColor="@color/black"
+          app:tabTextColor="@color/black"
+          />
+
+        <androidx.viewpager2.widget.ViewPager2
+          android:id="@+id/view_pager"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tabs"
+          />
+
+      </LinearLayout>
+
+
+
+      <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
