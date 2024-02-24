@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +14,18 @@ import com.madeean.githubuserapp.Utils
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.databinding.FragmentFollowersBinding
+import com.madeean.githubuserapp.ui.ViewModelFactory
 import com.madeean.githubuserapp.ui.detailuser.DetailActivity
 import com.madeean.githubuserapp.ui.detailuser.DetailViewModel
+import com.madeean.githubuserapp.ui.detailuser.listener.DetailListener
 import com.madeean.githubuserapp.ui.searchuser.MainState
+import com.madeean.githubuserapp.ui.searchuser.MainViewModel
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainAdapter
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainRepresentation
+import com.madeean.githubuserapp.ui.searchuser.listener.MainAdapterListener
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
 
-class FollowersFragment : Fragment() {
+class FollowersFragment : Fragment(), DetailListener {
     private lateinit var binding: FragmentFollowersBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var usernameSearch: String
@@ -57,7 +62,7 @@ class FollowersFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        dataAdapter.setOnItemClickCallback(object : MainListener {
+        dataAdapter.setOnItemClickCallback(object : MainAdapterListener {
             override fun onItemClickListener(data: MainRepresentation) {
                 val intent = Intent(requireContext(), DetailActivity::class.java)
                 intent.putExtra(Utils.INTENT_DATA, data.login)
@@ -86,11 +91,12 @@ class FollowersFragment : Fragment() {
 
     private fun setIdle() {
         if (usernameSearch.isBlank()) return
-        viewModel.getFollowers(usernameSearch, requireContext())
+        viewModel.getFollowersOrFollowing(usernameSearch, true)
     }
 
     private fun setViewModel() {
-        viewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(requireActivity(), factory)[DetailViewModel::class.java]
     }
 
     private fun setData(userList: ArrayList<DataUserGithubModel>) {
@@ -117,5 +123,9 @@ class FollowersFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onFavoriteClick(username: String, isFavorite: Boolean) {
+        TODO("Not yet implemented")
     }
 }

@@ -13,14 +13,17 @@ import com.madeean.githubuserapp.Utils
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.databinding.FragmentFollowingBinding
+import com.madeean.githubuserapp.ui.ViewModelFactory
 import com.madeean.githubuserapp.ui.detailuser.DetailActivity
 import com.madeean.githubuserapp.ui.detailuser.DetailViewModel
+import com.madeean.githubuserapp.ui.detailuser.listener.DetailListener
 import com.madeean.githubuserapp.ui.searchuser.MainState
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainAdapter
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainRepresentation
+import com.madeean.githubuserapp.ui.searchuser.listener.MainAdapterListener
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
 
-class FollowingFragment : Fragment() {
+class FollowingFragment : Fragment(),DetailListener {
     private lateinit var binding: FragmentFollowingBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var usernameSearch: String
@@ -57,11 +60,12 @@ class FollowingFragment : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = ViewModelProvider(requireActivity()).get(DetailViewModel::class.java)
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(requireActivity(), factory)[DetailViewModel::class.java]
     }
 
     private fun setAdapter() {
-        dataAdapter.setOnItemClickCallback(object : MainListener {
+        dataAdapter.setOnItemClickCallback(object : MainAdapterListener {
             override fun onItemClickListener(data: MainRepresentation) {
                 val intent = Intent(requireContext(), DetailActivity::class.java)
                 intent.putExtra(Utils.INTENT_DATA, data.login)
@@ -90,7 +94,7 @@ class FollowingFragment : Fragment() {
 
     private fun setIdle() {
         if (usernameSearch.isEmpty()) return
-        viewModel.getFollowing(usernameSearch, requireContext())
+        viewModel.getFollowersOrFollowing(usernameSearch, false)
     }
 
     private fun setData(userList: ArrayList<DataUserGithubModel>) {
@@ -117,5 +121,9 @@ class FollowingFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onFavoriteClick(username: String, isFavorite: Boolean) {
+        TODO("Not yet implemented")
     }
 }

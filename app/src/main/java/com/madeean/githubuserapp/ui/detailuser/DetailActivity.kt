@@ -3,8 +3,9 @@ package com.madeean.githubuserapp.ui.detailuser
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -14,10 +15,11 @@ import com.madeean.githubuserapp.Utils.loadUseGifThumb
 import com.madeean.githubuserapp.Utils.setVisibility
 import com.madeean.githubuserapp.data.response.DetailUserGithubModel
 import com.madeean.githubuserapp.databinding.ActivityDetailBinding
+import com.madeean.githubuserapp.ui.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private val viewModel: DetailViewModel by viewModels()
+    private lateinit var viewModel: DetailViewModel
     private lateinit var nameUser: String
     private var model: DetailUserGithubModel = DetailUserGithubModel.defaultData()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +27,14 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setViewModel()
         loadData()
         setObserve()
+    }
+
+    private fun setViewModel() {
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
     }
 
     private fun setViewPager() {
@@ -46,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel.usersGithub.observe(this) {
             when (it) {
                 is DetailState.Idle -> {
-                    viewModel.getDetail(nameUser, this)
+                    viewModel.getDetail(nameUser)
                 }
 
                 is DetailState.Loading -> setLoadingView()

@@ -1,6 +1,7 @@
 package com.madeean.githubuserapp.data.retrofit
 
 import android.content.Context
+import android.os.Build
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.madeean.githubuserapp.BuildConfig
 import okhttp3.Interceptor
@@ -27,7 +28,7 @@ class ApiConfig {
                 })
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

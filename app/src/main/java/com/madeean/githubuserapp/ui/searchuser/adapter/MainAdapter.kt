@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.madeean.githubuserapp.databinding.ItemsUserGithubBinding
+import com.madeean.githubuserapp.ui.searchuser.listener.MainAdapterListener
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
 
 class MainAdapter : ListAdapter<MainRepresentation, ViewHolder>(MainCallBack()) {
 
-    private lateinit var onItemCallBackListener: MainListener
-    fun setOnItemClickCallback(onItemClickCallback: MainListener) {
+    private lateinit var onItemCallBackListener: MainAdapterListener
+    fun setOnItemClickCallback(onItemClickCallback: MainAdapterListener) {
         this.onItemCallBackListener = onItemClickCallback
     }
 
