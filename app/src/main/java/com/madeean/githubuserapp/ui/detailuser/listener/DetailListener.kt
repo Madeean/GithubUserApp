@@ -1,5 +1,8 @@
 package com.madeean.githubuserapp.ui.detailuser.listener
 
+import com.madeean.githubuserapp.data.response.DetailUserGithubModel
+
 interface DetailListener {
-  fun onFavoriteClick(username: String, isFavorite: Boolean)
+  fun onFavoriteClick(data: DetailUserGithubModel, isFavorite: Boolean)
+  fun onBackClick()
 }

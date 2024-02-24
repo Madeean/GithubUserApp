@@ -20,7 +20,7 @@ data class FavoriteModelEntity(
   val name: String = "",
 
   @ColumnInfo(name = "avatar_url")
-  val avatar_url: String = "",
+  val avatarUrl: String = "",
 
   @ColumnInfo(name = "followers")
   val followers: Int = 0,
@@ -29,8 +29,11 @@ data class FavoriteModelEntity(
   val following: Int = 0,
 
   @ColumnInfo(name = "followers_url")
-  val followers_url: String = "",
+  val followersUrl: String = "",
 
   @ColumnInfo(name = "following_url")
-  val following_url: String = ""
+  val followingUrl: String = "",
+
+  @ColumnInfo(name = "url")
+  val url: String = "",
 ) : Parcelable

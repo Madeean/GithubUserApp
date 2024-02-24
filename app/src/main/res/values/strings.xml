@@ -4,4 +4,10 @@
   <string name="following" formatted="false">Following %d</string>
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="name">name</string>
+  <string name="username">username</string>
+  <string name="github_user_s_search">Github User\'s Search</string>
+  <string name="tidak_ada_data">Tidak ada data</string>
+  <string name="silahkan_mencari_username_terlebih_dahulu">Silahkan mencari username terlebih dahulu</string>
+  <string name="dark_mode">Dark Mode</string>
 </resources>

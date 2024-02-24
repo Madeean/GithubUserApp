@@ -22,6 +22,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="10dp"
       android:text="@string/username"
+      android:textColor="@color/light_gray"
       android:textSize="18sp"
       android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="@+id/iv_image"

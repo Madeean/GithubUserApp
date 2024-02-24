@@ -3,7 +3,6 @@ package com.madeean.githubuserapp.ui.searchuser
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +12,12 @@ import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.databinding.ActivityMainBinding
 import com.madeean.githubuserapp.ui.ViewModelFactory
 import com.madeean.githubuserapp.ui.detailuser.DetailActivity
+import com.madeean.githubuserapp.ui.favorite.FavoriteActivity
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainAdapter
 import com.madeean.githubuserapp.ui.searchuser.adapter.MainRepresentation
 import com.madeean.githubuserapp.ui.searchuser.listener.MainAdapterListener
 import com.madeean.githubuserapp.ui.searchuser.listener.MainListener
+import com.madeean.githubuserapp.ui.setting.SettingActivity
 
 class MainActivity : AppCompatActivity(), MainListener {
   private lateinit var binding: ActivityMainBinding
@@ -35,6 +36,18 @@ class MainActivity : AppCompatActivity(), MainListener {
     setupAdapter()
     setRecycleView()
     setSearchBar()
+    setupOnClick()
+  }
+
+  private fun setupOnClick() {
+    binding.run {
+      ivSetting.setOnClickListener {
+        onIconSettingClicked()
+      }
+      ivFavorite.setOnClickListener {
+        onIconFavoriteClicked()
+      }
+    }
   }
 
   private fun setViewModel() {
@@ -108,11 +121,11 @@ class MainActivity : AppCompatActivity(), MainListener {
   }
 
   override fun onIconSettingClicked() {
-    TODO("Not yet implemented")
+    startActivity(Intent(this, SettingActivity::class.java))
   }
 
   override fun onIconFavoriteClicked() {
-    TODO("Not yet implemented")
+    startActivity(Intent(this, FavoriteActivity::class.java))
   }
 
 }

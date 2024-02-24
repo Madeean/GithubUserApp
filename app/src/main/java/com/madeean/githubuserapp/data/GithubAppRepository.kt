@@ -3,6 +3,9 @@ package com.madeean.githubuserapp.data
 import androidx.lifecycle.LiveData
 import com.madeean.githubuserapp.data.local.FavoriteDao
 import com.madeean.githubuserapp.data.local.FavoriteModelEntity
+import com.madeean.githubuserapp.data.response.DataUserGithubModel
+import com.madeean.githubuserapp.data.response.DataUserGithubModel.Companion.transformsFromEntity
+import com.madeean.githubuserapp.data.response.DetailUserGithubModel
 import com.madeean.githubuserapp.data.retrofit.ApiService
 import com.madeean.githubuserapp.ui.detailuser.DetailState
 import com.madeean.githubuserapp.ui.searchuser.MainState
@@ -31,7 +34,7 @@ class GithubAppRepository private constructor(
   }
 
   suspend fun getFollowersOrFollowing(username: String, isFollowers: Boolean): MainState {
-    return try{
+    return try {
       val response = if (isFollowers) {
         apiService.getFollowers(username)
       } else {
@@ -43,16 +46,40 @@ class GithubAppRepository private constructor(
     }
   }
 
-  fun getAllFavorite(): LiveData<List<FavoriteModelEntity>> {
-    return favoriteDao.getAllFavorite()
+  fun getAllFavorite(): LiveData<ArrayList<DataUserGithubModel>> {
+    val rawData = favoriteDao.getAllFavorite()
+    return transformsFromEntity(rawData)
   }
 
-  suspend fun insert(favoriteModelEntity: FavoriteModelEntity) {
+  suspend fun checkFavoriteUser(username: String): Boolean {
+    return favoriteDao.checkFavoriteUser(username)
+  }
+
+  suspend fun setFavoriteUser(data: DetailUserGithubModel, isFavorite: Boolean): Boolean {
+    val favoriteModelEntity = FavoriteModelEntity(
+      login = data.login,
+      name = data.name,
+      avatarUrl = data.avatar_url,
+      followersUrl = data.followers_url,
+      followingUrl = data.following_url,
+      followers = data.followers,
+      following = data.following,
+    )
+    return if (isFavorite) {
+      deleteByLogin(data.login)
+      false
+    } else {
+      insert(favoriteModelEntity)
+      true
+    }
+  }
+
+  private suspend fun deleteByLogin(username: String) {
+    favoriteDao.deleteByLogin(username)
+  }
+
+  private suspend fun insert(favoriteModelEntity: FavoriteModelEntity) {
     favoriteDao.insert(favoriteModelEntity)
-  }
-
-  suspend fun delete(favoriteModelEntity: FavoriteModelEntity) {
-    favoriteDao.delete(favoriteModelEntity)
   }
 
   companion object {

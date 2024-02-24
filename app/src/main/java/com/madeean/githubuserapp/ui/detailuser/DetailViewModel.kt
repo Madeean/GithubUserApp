@@ -1,19 +1,13 @@
 package com.madeean.githubuserapp.ui.detailuser
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.madeean.githubuserapp.data.GithubAppRepository
-import com.madeean.githubuserapp.data.response.DataUserGithubModel
 import com.madeean.githubuserapp.data.response.DetailUserGithubModel
-import com.madeean.githubuserapp.data.retrofit.ApiConfig
 import com.madeean.githubuserapp.ui.searchuser.MainState
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailViewModel(private val githubRepository: GithubAppRepository) : ViewModel() {
   private val _usersGithub = MutableLiveData<DetailState>(DetailState.Idle)
@@ -27,6 +21,12 @@ class DetailViewModel(private val githubRepository: GithubAppRepository) : ViewM
   private val _usersFollowing = MutableLiveData<MainState>(MainState.Idle)
 
   var usersFollowing: LiveData<MainState> = _usersFollowing
+
+  private val _isInsertFavorite = MutableLiveData<Boolean>()
+  var isInsertFavorite: LiveData<Boolean> = _isInsertFavorite
+
+  private val _isUserHasFavorite = MutableLiveData<Boolean>()
+  var isUserHasFavorite: LiveData<Boolean> = _isUserHasFavorite
 
 
   fun getDetail(username: String) {
@@ -61,6 +61,18 @@ class DetailViewModel(private val githubRepository: GithubAppRepository) : ViewM
           _usersFollowing.postValue(MainState.Error(error.message ?: ""))
         }
       }
+    }
+  }
+
+  fun setFavoriteUser(user: DetailUserGithubModel, isFavorite: Boolean) {
+    viewModelScope.launch {
+      _isInsertFavorite.postValue(githubRepository.setFavoriteUser(user, isFavorite))
+    }
+  }
+
+  fun checkFavoriteUser(login: String) {
+    viewModelScope.launch {
+      _isUserHasFavorite.postValue(githubRepository.checkFavoriteUser(login))
     }
   }
 }

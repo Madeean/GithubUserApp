@@ -16,7 +16,7 @@ abstract class FavoriteDatabase : RoomDatabase() {
       instance ?: synchronized(this) {
         instance ?: Room.databaseBuilder(
           context.applicationContext,
-          FavoriteDatabase::class.java, "Favorite.db"
+          FavoriteDatabase::class.java, "Favorite.db2"
         ).build()
       }
   }
