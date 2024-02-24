@@ -1,20 +1,11 @@
 package com.madeean.githubuserapp.data
 
-import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
 import com.madeean.githubuserapp.data.local.FavoriteDao
 import com.madeean.githubuserapp.data.local.FavoriteModelEntity
-import com.madeean.githubuserapp.data.response.DetailUserGithubModel
-import com.madeean.githubuserapp.data.response.WrapperResponse
-import com.madeean.githubuserapp.data.retrofit.ApiConfig
 import com.madeean.githubuserapp.data.retrofit.ApiService
 import com.madeean.githubuserapp.ui.detailuser.DetailState
 import com.madeean.githubuserapp.ui.searchuser.MainState
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class GithubAppRepository private constructor(
   private val apiService: ApiService,
